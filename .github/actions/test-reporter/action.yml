@@ -1,5 +1,5 @@
-name: setup node
-description: setup node
+name: test-reporter
+description: A wrapper around dorny's test-reporter.
 inputs:
   step_name:
     description: step name

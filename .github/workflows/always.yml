@@ -12,10 +12,7 @@ jobs:
     needs: npm_run_lint
     runs-on: ubuntu-latest
     steps:
-      - uses: percebus/github-actions-common/.github/actions/checkout.yml@main
-      - uses: percebus/github-actions-node/.github/actions/node_setup.yml@main
-      - uses: percebus/github-actions-npm/.github/actions/npm_install.yml@main
-      - uses: ./.github/actions/test_reporter
+      - uses: ./.github/actions/test-reporter
         with:
           step_name: Unit Tests
           reporter: jest-junit
