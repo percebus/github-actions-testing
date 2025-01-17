@@ -2,4 +2,10 @@
 
 [`LICENSE`](./LICENSE.md)
 
-[![[C]ontinuous [I]ntegration](https://github.com/percebus/github-actions-testing/actions/workflows/always.yml/badge.svg)](https://github.com/percebus/github-actions-testing/actions/workflows/always.yml)
+[![[C]ontinuous [I]ntegration](https://github.com/percebus/github-actions-testing/actions/workflows/always.yml/badge.svg)](https://github.com/percebus/github-actions-testing/actions/workflows/always.yml) [![Pull Request](https://github.com/percebus/github-actions-testing/actions/workflows/pull_request.yml/badge.svg)](https://github.com/percebus/github-actions-testing/actions/workflows/pull_request.yml)
+
+## Workflows
+
+### Re-usable
+
+- [![jest-junit](https://github.com/percebus/github-actions-testing/actions/workflows/jest-junit.yml/badge.svg)](https://github.com/percebus/github-actions-testing/actions/workflows/jest-junit.yml)
