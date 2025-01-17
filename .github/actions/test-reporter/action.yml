@@ -1,7 +1,7 @@
 name: test-reporter
 description: A wrapper around dorny's test-reporter.
 inputs:
-  step_name:
+  name:
     description: step name
     required: false
     default: Unit Tests
@@ -23,6 +23,6 @@ runs:
       uses: dorny/test-reporter@v1
       if: always()
       with:
-        name: ${{ inputs.step_name }}
+        name: ${{ inputs.name }}
         path: ${{ inputs.files_pattern }}
         reporter: ${{ inputs.reporter }}
