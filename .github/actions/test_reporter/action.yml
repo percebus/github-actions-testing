@@ -1,0 +1,28 @@
+name: setup node
+description: setup node
+inputs:
+  step_name:
+    description: step name
+    required: false
+    default: Unit Tests
+
+  reporter:
+    description: Test report format
+    required: false
+    default: jest-junit
+
+  files_path:
+    description: test results files to collect and publish
+    required: false
+    default: junit.xml
+
+runs:
+  using: composite
+  steps:
+      - name: test-reporter
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: ${{ inputs.name }}
+          path: ${{ inputs.files_path }}
+          reporter: ${{ inputs.files_path }}
