@@ -1,4 +1,4 @@
-name: jest ci > junit.xml
+name: jest-junit
 on:
   push:
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
@@ -16,7 +16,7 @@ jobs:
       checks: write
 
     steps:
-      - uses: percebus/github-actions-common/.github/workflows/checkout@main
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: percebus/github-actions-node/.github/actions/node_setup@main
       - uses: percebus/github-actions-npm/.github/actions/npm_install@main
 
