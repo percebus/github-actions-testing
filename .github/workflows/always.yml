@@ -10,12 +10,12 @@ permissions:
   checks: write
 
 jobs:
-  npm_run_lint:
+  lint:
     uses: percebus/github-actions-npm/.github/workflows/npm_run_lint.yml@main
 
   # TODO Make a matrix
   jest-junit:
-    needs: npm_run_lint
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
