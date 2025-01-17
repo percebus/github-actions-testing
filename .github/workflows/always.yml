@@ -15,7 +15,7 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout.yml@main
       - uses: percebus/github-actions-node/.github/actions/node_setup.yml@main
       - uses: percebus/github-actions-npm/.github/actions/npm_install.yml@main
-      - uses: ./.github/actions/action.yml@main
+      - uses: ./.github/actions/test_reporter
         with:
           step_name: Unit Tests
           reporter: jest-junit
