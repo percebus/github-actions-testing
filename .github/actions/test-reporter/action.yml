@@ -1,0 +1,26 @@
+name: test-reporter
+description: A wrapper around dorny's test-reporter.
+inputs:
+  reporter:
+    description: Test report format
+    required: true
+
+  files_pattern:
+    description: test results files to collect and publish
+    required: true
+
+  name:
+    description: step name
+    required: false
+    default: Unit Tests
+
+runs:
+  using: composite
+  steps:
+    - name: test-reporter
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.files_pattern }}
+        reporter: ${{ inputs.reporter }}
