@@ -17,4 +17,4 @@ jobs:
         with:
           step_name: jest-junit.xml
           reporter: jest-junit
-          files_path: junit.xml
+          files_path: assets/junit.xml
