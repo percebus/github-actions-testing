@@ -19,10 +19,10 @@ inputs:
 runs:
   using: composite
   steps:
-      - name: test-reporter
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: ${{ inputs.name }}
-          path: ${{ inputs.files_path }}
-          reporter: ${{ inputs.files_path }}
+    - name: test-reporter
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.files_path }}
+        reporter: ${{ inputs.files_path }}
