@@ -6,13 +6,15 @@ on:
 
 jobs:
   npm_test:
+    name: npm test
+    runs-on: ubuntu-latest
+
     # SRC: https://github.com/dorny/test-reporter?tab=readme-ov-file#recommended-setup-for-public-repositories
     permissions:
       contents: read
       actions: read
       checks: write
 
-    runs-on: ubuntu-latest
     steps:
       - uses: percebus/github-actions-common/.github/workflows/checkout@main
       - uses: percebus/github-actions-node/.github/actions/node_setup@main
