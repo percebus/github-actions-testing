@@ -7,5 +7,5 @@ on:
   workflow_call: # SRC: https://docs.github.com/en/actions/using-workflows/reusing-workflows
 
 jobs:
-  npm_audit:
+  audit:
     uses: percebus/github-actions-npm/.github/workflows/dependency-review.yml@main
