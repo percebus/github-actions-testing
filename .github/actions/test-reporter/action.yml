@@ -1,20 +1,18 @@
 name: test-reporter
 description: A wrapper around dorny's test-reporter.
 inputs:
+  reporter:
+    description: Test report format
+    required: true
+
+  files_pattern:
+    description: test results files to collect and publish
+    required: true
+
   name:
     description: step name
     required: false
     default: Unit Tests
-
-  reporter:
-    description: Test report format
-    required: false
-    default: jest-junit
-
-  files_pattern:
-    description: test results files to collect and publish
-    required: false
-    default: junit.xml
 
 runs:
   using: composite
