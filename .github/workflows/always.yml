@@ -3,6 +3,12 @@ on:
   push:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
+# SRC: https://github.com/dorny/test-reporter?tab=readme-ov-file#recommended-setup-for-public-repositories
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
 jobs:
   npm_run_lint:
     uses: percebus/github-actions-npm/.github/workflows/npm_run_lint.yml@main
