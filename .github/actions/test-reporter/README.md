@@ -11,6 +11,18 @@ permissions:
   checks: write
 ```
 
+## Screenshots
+
+### Provided Error
+
+#### Summary
+
+![Provided error summary](../../../assets/img/test-reporter/provided-error-summary.png)
+
+#### Details
+
+![Provided error details](../../../assets/img/test-reporter/provided-error-details.png)
+
 ## References
 
 ### GitHub
