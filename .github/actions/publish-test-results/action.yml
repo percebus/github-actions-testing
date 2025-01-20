@@ -29,7 +29,7 @@ runs:
 
     - name: ${{ inputs.name }} @ macos
       uses: EnricoMi/publish-unit-test-result-action/macos@v2.18.0
-      if: (success() || failure()) && ${{ inputs.runs-on }} == startsWith(${{ inputs.runs-on }}, 'macos')
+      if: (success() || failure()) && startsWith(${{ inputs.runs-on }}, 'macos')
       with:
         files: ${{ inputs.files_pattern }}
 
