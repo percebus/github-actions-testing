@@ -4,8 +4,8 @@ on:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 jobs:
-  test-summary:
-    name: test-summary test-results jest-junit.xml
+  jest-junit:
+    name: jest-junit.xml
     continue-on-error: true
     strategy:
       max-parallel: 10

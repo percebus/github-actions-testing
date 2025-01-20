@@ -9,8 +9,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  publish-test-deltas_junit-xml:
-    name: publish-test-deltas jest-junit.xml
+  junit-xml:
+    name: jest-junit.xml
     continue-on-error: true
     strategy:
       max-parallel: 10
