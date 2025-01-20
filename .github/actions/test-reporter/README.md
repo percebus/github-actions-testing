@@ -17,11 +17,11 @@ permissions:
 
 #### Summary
 
-![Provided error summary](../../../assets/img/test-reporter/provided-error-summary.png)
+![Provided error summary](../../../assets/img/dorny/test-reporter/provided-error-summary.png)
 
 #### Details
 
-![Provided error details](../../../assets/img/test-reporter/provided-error-details.png)
+![Provided error details](../../../assets/dorny/img/test-reporter/provided-error-details.png)
 
 ## References
 

@@ -26,7 +26,7 @@ permissions:
 
 ### summary
 
-![summary](../../../assets/img/publish-test-results/summary.png)
+![summary](../../../assets/img/EnricoMi/publish-unit-test-result-action/summary.png)
 
 ## References
 

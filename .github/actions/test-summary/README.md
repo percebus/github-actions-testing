@@ -1,5 +1,11 @@
 # test-summary
 
+## Screenshots
+
+### Summary
+
+![Screenshot](../../../assets/img/pmeier/pytest-results-action/summary.png)
+
 ## References
 
 ### GitHub
