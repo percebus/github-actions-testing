@@ -1,0 +1,24 @@
+name: publish-test-results
+description: A wrapper around EnricoMi's publish-unit-test-result-action.
+inputs:
+
+  # test-results/**/*.xml
+  # test-results/**/*.trx
+  # test-results/**/*.json
+  files_pattern:
+    description: test results files to collect and publish
+    required: true
+
+  name:
+    description: step name
+    required: false
+    default: Publish ${{ inputs.files_pattern }}
+
+runs:
+  using: composite
+  steps:
+    - name: ${{ inputs.name }}
+      uses: EnricoMi/publish-unit-test-result-action@v2.18.0
+      if: always()
+      with:
+        files: ${{ inputs.files_pattern }}
