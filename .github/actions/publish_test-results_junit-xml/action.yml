@@ -14,7 +14,7 @@ inputs:
   summary:
     description: Add a summary of the results at the top of the report
     required: false
-    default: 'true'
+    default: "true"
 
   display-options:
     description: Select which results should be included in the report.
@@ -24,7 +24,7 @@ inputs:
   fail-on-empty:
     description: Fail the workflow if no JUnit XML was found.
     required: false
-    default: 'true'
+    default: "true"
 
   title:
     description: title of the test results section in the workflow summary
