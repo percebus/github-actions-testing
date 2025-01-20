@@ -1,0 +1,67 @@
+name: publish_test-results_junit-xml
+description: A wrapper around pmeier's pytest-results-action.
+inputs:
+  files_pattern:
+    description: test results files to collect and publish
+    required: false
+    default: test-results.xml
+
+  name:
+    description: step name
+    required: false
+    default: Surface failing tests
+
+  summary:
+    description: Add a summary of the results at the top of the report
+    required: false
+    default: "true"
+
+  # NOTE: from pytest
+  #  -r chars: Show extra test summary info as specified by chars:
+  # - (f)ailed, (x)failed, (E)rror
+  # - (s)kipped
+  # - (X)passed, (p)assed, (P)assed with output
+  # - (a)ll except passed (p/P)
+  # - (A)ll.
+  # - (w)arnings are enabled
+  #
+  # - (default: 'fE').
+  display-options:
+    description: Select which results should be included in the report.
+    required: false
+    default: fEX
+
+  fail-on-empty:
+    description: Fail the workflow if no JUnit XML was found.
+    required: false
+    default: "true"
+
+  title:
+    description: title of the test results section in the workflow summary
+    required: false
+    default: Test results
+
+runs:
+  using: composite
+  steps:
+    - name: ${{ inputs.name }}
+      uses: pmeier/pytest-results-action@v0.7.1 # FIXME
+      if: always()
+      with:
+        # A list of JUnit XML files, directories containing the former, and wildcard
+        # patterns to process.
+        # See @actions/glob for supported patterns.
+        path: ${{ inputs.files_pattern }}
+
+        # (Optional) Add a summary of the results at the top of the report
+        summary: ${{ inputs.summary }}
+
+        # (Optional) Select which results should be included in the report.
+        # Follows the same syntax as `pytest -r`
+        display-options: ${{ inputs.display-options }}
+
+        # (Optional) Fail the workflow if no JUnit XML was found.
+        fail-on-empty: ${{ inputs.fail-on-empty }}
+
+        # (Optional) Title of the test results section in the workflow summary
+        title: ${{ inputs.title }}

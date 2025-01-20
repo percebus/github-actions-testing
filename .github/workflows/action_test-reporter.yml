@@ -1,0 +1,31 @@
+name: actions/test-reporter
+on:
+  push:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+# SRC: https://github.com/dorny/test-reporter?tab=readme-ov-file#recommended-setup-for-public-repositories
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+jobs:
+  jest-junit:
+    continue-on-error: true
+    strategy:
+      max-parallel: 10
+      matrix:
+        # Different OS
+        OS:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    name: Upload jest-junit.xml
+    runs-on: ${{ matrix.OS }}
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-reporter
+        with:
+          name: jest-junit.xml @ ${{ matrix.OS }}
+          reporter: jest-junit
+          files_pattern: assets/test-results/jest/junit.xml

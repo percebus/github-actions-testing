@@ -1,0 +1,25 @@
+name: actions/test-summary
+on:
+  push:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+jobs:
+  jest-junit:
+    name: jest-junit.xml
+    continue-on-error: true
+    strategy:
+      max-parallel: 10
+      matrix:
+        # Different OS
+        OS:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.OS }}
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-summary
+        with:
+          name: jest-junit.xml @ ${{ matrix.OS }}
+          title: Test Results @ ${{ matrix.OS }}
+          files_pattern: assets/test-results/jest/junit.xml

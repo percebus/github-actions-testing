@@ -10,7 +10,7 @@ inputs:
     required: true
 
   name:
-    description: step name
+    description: GitHub action "run name"
     required: false
     default: Unit Tests
 
@@ -18,7 +18,7 @@ runs:
   using: composite
   steps:
     - name: test-reporter
-      uses: dorny/test-reporter@v1
+      uses: dorny/test-reporter@v1.9.1
       if: always()
       with:
         name: ${{ inputs.name }}

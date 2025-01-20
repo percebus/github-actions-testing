@@ -1,5 +1,5 @@
 
-junit*.xml
+!assets/test-results/**
 
 
 ######################
