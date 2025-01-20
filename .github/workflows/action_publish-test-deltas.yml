@@ -27,6 +27,6 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/publish-test-deltas
         with:
-          name: publish test-results jest-junit.xml
+          name: actions/publish-test-deltas:jest-junit.xml @ ${{ matrix.OS }}
           runs-on: ${{ matrix.OS }}
           files_pattern: assets/test-results/jest/junit.xml
