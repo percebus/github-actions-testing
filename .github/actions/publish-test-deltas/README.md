@@ -1,4 +1,4 @@
-# publish-test-results
+# publish-test-deltas
 
 ## permissions
 

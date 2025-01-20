@@ -1,4 +1,4 @@
-name: publish-test-results
+name: publish-test-deltas
 description: A wrapper around EnricoMi's publish-unit-test-result-action.
 inputs:
   # test-results/**/*.xml
