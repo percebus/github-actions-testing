@@ -1,6 +1,11 @@
 name: junit
 description: junit
 inputs:
+  runs-on:
+    description: The OS to run the action on.
+    required: false
+    default: ubuntu-latest
+
   reporter:
     description: The test reporter to use.
     required: false
@@ -44,5 +49,5 @@ runs:
     - uses: percebus/github-actions-testing/.github/actions/publish-test-deltas@main
       with:
         name: ${{ inputs.publish_step_name }}
-        runs-on: ubuntu-latest
+        runs-on: ${{ inputs.runs-on }}
         files_pattern: ${{ inputs.files_pattern }}
