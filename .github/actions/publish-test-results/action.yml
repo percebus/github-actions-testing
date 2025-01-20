@@ -11,7 +11,7 @@ inputs:
   name:
     description: step name
     required: false
-    default: Publish ${{ inputs.files_pattern }}
+    default: Publish Test Results
 
 runs:
   using: composite

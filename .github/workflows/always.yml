@@ -16,6 +16,7 @@ jobs:
   # TODO Make a matrix
   test-reporter_jest-junit:
     needs: lint
+    name: test-reporter jest-junit.xml
     runs-on: ubuntu-latest
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
@@ -27,6 +28,7 @@ jobs:
 
   publish-test-results_junit-xml:
     needs: lint
+    name: publish-test-results jest-junit.xml
     runs-on: ubuntu-latest
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
@@ -38,6 +40,7 @@ jobs:
   # TODO Make a matrix
   publish_test-results_junit-xml:
     needs: lint
+    name: publish test-results jest-junit.xml
     runs-on: ubuntu-latest
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main

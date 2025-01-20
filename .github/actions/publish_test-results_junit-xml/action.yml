@@ -35,7 +35,7 @@ runs:
   using: composite
   steps:
     - name: ${{ inputs.name }}
-      uses: pmeier/pytest-results-action@v0.7.1
+      uses: pmeier/pytest-results-action@v0.7.1 # FIXME
       if: always()
       with:
         # A list of JUnit XML files, directories containing the former, and wildcard
@@ -44,14 +44,14 @@ runs:
         path: ${{ inputs.files_pattern }}
 
         # (Optional) Add a summary of the results at the top of the report
-        summary: ${ inputs.summary }
+        summary: ${{ inputs.summary }}
 
         # (Optional) Select which results should be included in the report.
         # Follows the same syntax as `pytest -r`
-        display-options: fEX
+        display-options: ${{ inputs.display-options }}
 
         # (Optional) Fail the workflow if no JUnit XML was found.
-        fail-on-empty: true
+        fail-on-empty: ${{ inputs.fail-on-empty }}
 
         # (Optional) Title of the test results section in the workflow summary
-        title: Test results
+        title: ${{ inputs.title }}
