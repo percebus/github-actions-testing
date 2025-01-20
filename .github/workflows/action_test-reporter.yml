@@ -26,6 +26,6 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-reporter
         with:
-          name: test-reporter jest-junit.xml @ ${{ matrix.OS }}
+          name: jest-junit.xml @ ${{ matrix.OS }}
           reporter: jest-junit
           files_pattern: assets/test-results/jest/junit.xml
