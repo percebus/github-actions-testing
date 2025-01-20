@@ -16,6 +16,16 @@ inputs:
     required: false
     default: "true"
 
+  # NOTE: from pytest
+  #  -r chars: Show extra test summary info as specified by chars:
+  # - (f)ailed, (x)failed, (E)rror
+  # - (s)kipped
+  # - (X)passed, (p)assed, (P)assed with output
+  # - (a)ll except passed (p/P)
+  # - (A)ll.
+  # - (w)arnings are enabled
+  #
+  # - (default: 'fE').
   display-options:
     description: Select which results should be included in the report.
     required: false
