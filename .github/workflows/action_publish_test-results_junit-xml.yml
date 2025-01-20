@@ -21,4 +21,5 @@ jobs:
       - uses: ./.github/actions/publish_test-results_junit-xml
         with:
           name: jest-junit.xml @ ${{ matrix.OS }}
+          title: Test Results @ ${{ matrix.OS }}
           files_pattern: assets/test-results/jest/junit.xml
