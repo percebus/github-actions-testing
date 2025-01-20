@@ -1,7 +1,6 @@
 name: publish-test-results
 description: A wrapper around EnricoMi's publish-unit-test-result-action.
 inputs:
-
   # test-results/**/*.xml
   # test-results/**/*.trx
   # test-results/**/*.json
