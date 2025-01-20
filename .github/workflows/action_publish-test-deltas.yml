@@ -1,4 +1,4 @@
-name: actions/publish-test-results
+name: actions/publish-test-deltas
 on:
   push:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
@@ -9,8 +9,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  publish-test-results_junit-xml:
-    name: publish-test-results jest-junit.xml
+  publish-test-deltas_junit-xml:
+    name: publish-test-deltas jest-junit.xml
     continue-on-error: true
     strategy:
       max-parallel: 10
@@ -25,7 +25,7 @@ jobs:
     runs-on: ${{ matrix.OS }}
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
-      - uses: ./.github/actions/publish-test-results
+      - uses: ./.github/actions/publish-test-deltas
         with:
           name: publish test-results jest-junit.xml
           runs-on: ${{ matrix.OS }}
