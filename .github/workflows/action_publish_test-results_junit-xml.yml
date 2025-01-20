@@ -13,7 +13,6 @@ permissions:
 jobs:
   # TODO Make a matrix
   publish_test-results_junit-xml:
-    needs: lint
     name: publish test-results jest-junit.xml
     runs-on: ubuntu-latest
     steps:

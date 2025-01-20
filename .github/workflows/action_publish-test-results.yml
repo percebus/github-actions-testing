@@ -12,7 +12,6 @@ permissions:
 
 jobs:
   publish-test-results_junit-xml:
-    needs: lint
     name: publish-test-results jest-junit.xml
     continue-on-error: true
     strategy:

@@ -12,7 +12,6 @@ permissions:
 
 jobs:
   test-reporter_jest-junit:
-    needs: lint
     name: test-reporter jest-junit.xml
     continue-on-error: true
     strategy:
