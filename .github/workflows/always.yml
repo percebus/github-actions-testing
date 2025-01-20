@@ -14,28 +14,46 @@ jobs:
   lint:
     uses: percebus/github-actions-npm/.github/workflows/npm_run_lint.yml@main
 
-  # TODO Make a matrix
   test-reporter_jest-junit:
     needs: lint
     name: test-reporter jest-junit.xml
-    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      max-parallel: 10
+      matrix:
+        # Different OS
+        OS:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.OS }}
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-reporter
         with:
-          name: test-reporter jest-junit.xml
+          name: test-reporter jest-junit.xml @ ${{ matrix.OS }}
           reporter: jest-junit
           files_pattern: assets/test-results/jest/junit.xml
 
   publish-test-results_junit-xml:
     needs: lint
     name: publish-test-results jest-junit.xml
-    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      max-parallel: 10
+      matrix:
+        # Different OS
+        OS:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+    runs-on: ${{ matrix.OS }}
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/publish-test-results
         with:
           name: publish test-results jest-junit.xml
+          runs-on: ${{ matrix.OS }}
           files_pattern: assets/test-results/jest/junit.xml
 
   # TODO Make a matrix

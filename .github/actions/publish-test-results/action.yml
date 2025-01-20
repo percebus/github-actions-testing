@@ -13,11 +13,28 @@ inputs:
     required: false
     default: Publish Test Results
 
+  runs-on:
+    description: OS to run the action on
+    required: false
+    default: ubuntu
+
 runs:
   using: composite
   steps:
     - name: ${{ inputs.name }}
       uses: EnricoMi/publish-unit-test-result-action@v2.18.0
-      if: always()
+      if: (success() || failure()) && startsWith(${{ inputs.runs-on }}, 'ubuntu')
+      with:
+        files: ${{ inputs.files_pattern }}
+
+    - name: ${{ inputs.name }} @ macos
+      uses: EnricoMi/publish-unit-test-result-action/macos@v2.18.0
+      if: (success() || failure()) && ${{ inputs.runs-on }} == startsWith(${{ inputs.runs-on }}, 'macos')
+      with:
+        files: ${{ inputs.files_pattern }}
+
+    - name: ${{ inputs.name }} @ windows
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2.18.0
+      if: (success() || failure()) && startsWith(${{ inputs.runs-on }}, 'windows')
       with:
         files: ${{ inputs.files_pattern }}
