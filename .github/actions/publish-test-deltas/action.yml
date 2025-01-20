@@ -16,7 +16,7 @@ inputs:
   runs-on:
     description: OS to run the action on
     required: false
-    default: ubuntu
+    default: ubuntu-latest
 
 runs:
   using: composite
