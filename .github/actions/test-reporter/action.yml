@@ -98,11 +98,11 @@ runs:
 
         # Allows you to generate reports for Actions Summary
         # https://github.blog/2022-05-09-supercharging-github-actions-with-job-summaries/
-        use-actions-summary: ${{ inputs.use-actions-summary }}
+        # use-actions-summary: ${{ inputs.use-actions-summary }} # FIXME? "Unexpected input(s)"
 
         # Customize the title of badges shown for each Actions Summary.
         # Useful when distinguish summaries for tests ran in multiple Actions steps.
-        badge-title: ${{ inputs.badge-title }}
+        # badge-title: ${{ inputs.badge-title }} # FIXME? "Unexpected input(s)"
 
         # Limits which test suites are listed:
         #   all
