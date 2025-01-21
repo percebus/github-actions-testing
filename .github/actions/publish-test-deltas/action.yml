@@ -8,11 +8,6 @@ inputs:
     description: test results files to collect and publish
     required: true
 
-  name:
-    description: step name
-    required: false
-    default: Publish Test Results
-
   runs-on:
     description: OS to run the action on
     required: false
@@ -21,7 +16,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: ${{ inputs.name }}
+    - name: publish-unit-test-result-action
       uses: EnricoMi/publish-unit-test-result-action@v2.18.0
       if: always()
       # if: (success() || failure()) && startsWith(${{ inputs.runs-on }}, 'ubuntu') # FIXME
@@ -29,13 +24,13 @@ runs:
         files: ${{ inputs.files_pattern }}
 
     # FIXME
-    # - name: ${{ inputs.name }} @ macos
+    # - name: publish-unit-test-result-action @ macos
     #   uses: EnricoMi/publish-unit-test-result-action/macos@v2.18.0
     #   if: (success() || failure()) && startsWith(${{ inputs.runs-on }}, 'macos')
     #   with:
     #     files: ${{ inputs.files_pattern }}
 
-    # - name: ${{ inputs.name }} @ windows
+    # - name: publish-unit-test-result-action @ windows
     #   uses: EnricoMi/publish-unit-test-result-action/windows@v2.18.0
     #   if: (success() || failure()) && startsWith(${{ inputs.runs-on }}, 'windows')
     #   with:
