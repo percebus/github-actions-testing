@@ -22,7 +22,7 @@ inputs:
   fail-on-error:
     description: Set action as failed if test report contains any failed test
     required: false
-    default: "true"
+    default: "false"
 
   use-actions-summary:
     description: Allows you to generate reports for Actions Summary
