@@ -33,4 +33,3 @@ jobs:
           tests_name: actions/junit:jest-junit.xml @ ${{ matrix.OS }}
           summary_title: actions/junit:Test Summary @ ${{ matrix.OS }}
           files_pattern: assets/test-results/jest/junit.xml
-          publish_step_name: actions/junit:Publish Test Deltas @ ${{ matrix.OS }}

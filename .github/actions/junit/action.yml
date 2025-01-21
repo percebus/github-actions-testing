@@ -26,11 +26,6 @@ inputs:
     required: false
     default: Unit Tests Summary
 
-  publish_step_name:
-    description: The name of the publish step.
-    required: false
-    default: Publish Test Deltas
-
 runs:
   using: composite
   steps:

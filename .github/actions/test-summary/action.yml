@@ -6,11 +6,6 @@ inputs:
     required: false
     default: test-results.xml
 
-  name:
-    description: step name
-    required: false
-    default: Surface failing tests
-
   summary:
     description: Add a summary of the results at the top of the report
     required: false
@@ -44,7 +39,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: ${{ inputs.name }}
+    - name: pytest-results-action
       uses: pmeier/pytest-results-action@v0.7.1 # FIXME
       if: always()
       with:
