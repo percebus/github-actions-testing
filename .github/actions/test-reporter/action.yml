@@ -42,12 +42,12 @@ inputs:
   list-suites:
     description: Limits which test suites are listed
     required: false
-    default: "all"
+    default: all
 
   list-tests:
     description: Limits which test cases are listed
     required: false
-    default: "failed"
+    default: failed
 
   # Must be less or equal to 50.
   max-annotations:
