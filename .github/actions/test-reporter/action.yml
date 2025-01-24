@@ -42,7 +42,7 @@ inputs:
   list-suites:
     description: Limits which test suites are listed
     required: false
-    default: "failed"
+    default: "all"
 
   list-tests:
     description: Limits which test cases are listed

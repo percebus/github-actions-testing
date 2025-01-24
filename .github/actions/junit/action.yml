@@ -1,11 +1,6 @@
 name: junit
 description: junit
 inputs:
-  runs-on:
-    description: The OS to run the action on.
-    required: false
-    default: ubuntu-latest
-
   reporter:
     description: The test reporter to use.
     required: false
@@ -26,6 +21,23 @@ inputs:
     required: false
     default: Unit Tests Summary
 
+  # test-reporter inputs
+  list-suites:
+    description: Limits which test suites are listed
+    required: false
+    default: "all"
+
+  list-tests:
+    description: Limits which test cases are listed
+    required: false
+    default: "failed"
+
+  # publish-test-deltas inputs
+  runs-on:
+    description: The OS to run the action on.
+    required: false
+    default: ubuntu-latest
+
 runs:
   using: composite
   steps:
@@ -35,6 +47,8 @@ runs:
         name: ${{ inputs.tests_name }}
         reporter: ${{ inputs.reporter }}
         files_pattern: ${{ inputs.files_pattern }}
+        list-suites: ${{ inputs.list-suites }}
+        list-tests: ${{ inputs.list-tests }}
 
     - uses: percebus/github-actions-testing/.github/actions/test-summary@main
       if: always()
