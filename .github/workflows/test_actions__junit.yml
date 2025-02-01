@@ -21,8 +21,7 @@ jobs:
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
-        with:
-          files_pattern: ${{ env.FILES_PATTERN }}
+
 
   junit_matrix:
     needs: default
