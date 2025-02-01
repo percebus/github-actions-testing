@@ -22,7 +22,6 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
 
-
   junit_matrix:
     needs: default
     strategy:
