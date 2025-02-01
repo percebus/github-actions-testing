@@ -9,10 +9,25 @@ permissions:
   actions: read
   checks: write
 
+env: # required
+  REPORTER: jest-junit
+  FILES_PATTERN: assets/test-results/jest/junit.xml
+
 jobs:
-  jest-junit:
-    continue-on-error: true
+  default:
+    name: default
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-reporter
+        with:
+          reporter: ${{ env.REPORTER }}
+          files_pattern: ${{ env.FILES_PATTERN }}
+
+  os_matrix:
+    needs: default
     strategy:
+      fail-fast: false
       max-parallel: 10
       matrix:
         # Different OS
@@ -20,12 +35,38 @@ jobs:
           - ubuntu-latest
           - macos-latest
           - windows-latest
-    name: Upload jest-junit.xml
     runs-on: ${{ matrix.OS }}
+    name: "@ ${{ matrix.OS }}"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-reporter
         with:
-          name: actions/test-reporter:jest-junit.xml @ ${{ matrix.OS }}
-          reporter: jest-junit
-          files_pattern: assets/test-results/jest/junit.xml
+          name: actions/test-reporter:${{ env.REPORTER }} @ ${{ matrix.OS }}
+          reporter: ${{ env.REPORTER }}
+          files_pattern: ${{ env.FILES_PATTERN }}
+
+  list_matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        list-suites:
+          - all
+          - failed
+
+        list-tests:
+          - all
+          - failed
+          - none
+    name: list-suites & tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-reporter
+        with:
+          name: "actions/test-reporter:${{ env.REPORTER }} list-suites:${{ matrix.list-suites }} list-tests:${{ matrix.list-tests }}"
+          reporter: ${{ env.REPORTER }}
+          files_pattern: ${{ env.FILES_PATTERN }}
+          list-suites: ${{ matrix.list-suites }}
+          list-tests: ${{ matrix.list-tests }}

@@ -11,11 +11,24 @@ permissions:
   checks: write
   pull-requests: write
 
+env:
+  FILES_PATTERN: assets/test-results/jest/junit.xml
+
 jobs:
-  junit:
-    continue-on-error: true
+  default:
+    name: default
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/junit
+        with:
+          files_pattern: ${{ env.FILES_PATTERN }}
+
+  os_matrix:
+    needs: default
     strategy:
       max-parallel: 10
+      fail-fast: false
       matrix:
         # Different OS
         OS:
@@ -24,12 +37,39 @@ jobs:
           # FIXME
           # - macos-latest
           # - windows-latest
-    name: Upload jest-junit.xml
     runs-on: ${{ matrix.OS }}
+    name: "@ ${{ matrix.OS }}"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
         with:
-          tests_name: actions/junit:jest-junit.xml @ ${{ matrix.OS }}
+          tests_name: actions/junit:${{ env.REPORTER }} @ ${{ matrix.OS }}
           summary_title: actions/junit:Test Summary @ ${{ matrix.OS }}
-          files_pattern: assets/test-results/jest/junit.xml
+          files_pattern: ${{ env.FILES_PATTERN }}
+
+  list_matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        list-suites:
+          - all
+          - failed
+
+        list-tests:
+          - all
+          - failed
+          - none
+    name: list-suites & tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/junit
+        with:
+          tests_name: "actions/junit:${{ env.REPORTER }} list-suites:${{ matrix.list-suites }} list-tests:${{ matrix.list-tests }}"
+          summary_title: ""
+          reporter: ${{ env.REPORTER }}
+          files_pattern: ${{ env.FILES_PATTERN }}
+          list-suites: ${{ matrix.list-suites }}
+          list-tests: ${{ matrix.list-tests }}
