@@ -10,9 +10,20 @@ permissions:
   checks: write
 
 jobs:
+  default:
+    name: default
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-reporter
+        with:
+          name: actions/test-reporter:jest-junit.xml @ ${{ matrix.OS }}
+          reporter: jest-junit
+          files_pattern: assets/test-results/jest/junit.xml
+
   jest-junit:
-    continue-on-error: true
     strategy:
+      fail-fast: false
       max-parallel: 10
       matrix:
         # Different OS

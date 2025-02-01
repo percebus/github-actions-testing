@@ -4,10 +4,20 @@ on:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 jobs:
+  default:
+    name: default
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-summary
+        with:
+          files_pattern: assets/test-results/jest/junit.xml
+
   jest-junit:
     name: jest-junit.xml
-    continue-on-error: true
+    needs: default
     strategy:
+      fail-fast: false
       max-parallel: 10
       matrix:
         # Different OS
