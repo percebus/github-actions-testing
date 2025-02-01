@@ -54,7 +54,6 @@ jobs:
         list-suites:
           - all
           - failed
-          - none
 
         list-tests:
           - all
