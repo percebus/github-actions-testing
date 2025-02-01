@@ -21,8 +21,7 @@ jobs:
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
 
-  junit-xml_matrix:
-    name: jest-junit.xml
+  os_matrix:
     needs: default
     strategy:
       fail-fast: false
@@ -36,6 +35,7 @@ jobs:
           # - macos-latest
           # - windows-latest
     runs-on: ${{ matrix.OS }}
+    name: ${{ matrix.OS }}
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/publish-test-deltas
@@ -43,3 +43,21 @@ jobs:
           name: actions/publish-test-deltas:jest-junit.xml @ ${{ matrix.OS }}
           runs-on: ${{ matrix.OS }}
           files_pattern: ${{ env.FILES_PATTERN }}
+
+  files_pattern_matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        files_pattern:
+          - assets/test-results/jest/junit.xml
+          - assets/**/jest/junit.xml
+          - '**/*junit.xml'
+    runs-on: ${{ matrix.OS }}
+    name: ${{ matrix.OS }}
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/publish-test-deltas
+        with:
+          files_pattern: ${{ env.files_pattern }}

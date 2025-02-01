@@ -22,9 +22,9 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
         with:
-          files_pattern: ""
+          files_pattern: ${{ env.FILES_PATTERN }}
 
-  junit_matrix:
+  os_matrix:
     needs: default
     strategy:
       max-parallel: 10
@@ -37,8 +37,8 @@ jobs:
           # FIXME
           # - macos-latest
           # - windows-latest
-    name: Upload jest-junit.xml
     runs-on: ${{ matrix.OS }}
+    name: "@ ${{ matrix.OS }}"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
@@ -46,3 +46,28 @@ jobs:
           tests_name: actions/junit:jest-junit.xml @ ${{ matrix.OS }}
           summary_title: actions/junit:Test Summary @ ${{ matrix.OS }}
           files_pattern: ${{ env.FILES_PATTERN }}
+
+  list_matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        list-suites:
+          - all
+          - failed
+
+        list-tests:
+          - all
+          - failed
+          - none
+    name: list-suites & tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-junit
+        with:
+          reporter: ${{ env.REPORTER }}
+          files_pattern: ${{ env.FILES_PATTERN }}
+          list-suites: ${{ matrix.list-suites }}
+          list-tests: ${{ matrix.list-tests }}

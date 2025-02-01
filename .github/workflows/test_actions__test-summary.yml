@@ -16,8 +16,7 @@ jobs:
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
 
-  jest-junit:
-    name: jest-junit.xml
+  os_matrix:
     needs: default
     strategy:
       fail-fast: false
@@ -29,6 +28,7 @@ jobs:
           - macos-latest
           - windows-latest
     runs-on: ${{ matrix.OS }}
+    name: "@ ${{ matrix.OS }}"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-summary

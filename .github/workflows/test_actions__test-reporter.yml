@@ -24,7 +24,7 @@ jobs:
           reporter: ${{ env.REPORTER }}
           files_pattern: ${{ env.FILES_PATTERN }}
 
-  jest-junit_matrix:
+  os_matrix:
     needs: default
     strategy:
       fail-fast: false
@@ -35,8 +35,8 @@ jobs:
           - ubuntu-latest
           - macos-latest
           - windows-latest
-    name: "@ ${{ matrix.OS }}"
     runs-on: ${{ matrix.OS }}
+    name: "@ ${{ matrix.OS }}"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-reporter
