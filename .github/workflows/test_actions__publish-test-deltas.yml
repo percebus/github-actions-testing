@@ -52,7 +52,7 @@ jobs:
       max-parallel: 10
       matrix:
         files_pattern:
-          - assets/test-results/jest/junit.xml
+          - ${{ env.FILES_PATTERN }}
           - assets/**/jest/junit.xml
           - "**/*junit.xml"
     name: "files_pattern: ${{ matrix.files_pattern }}"
@@ -60,4 +60,4 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/publish-test-deltas
         with:
-          files_pattern: ${{ env.files_pattern }}
+          files_pattern: ${{ matrix.files_pattern }}
