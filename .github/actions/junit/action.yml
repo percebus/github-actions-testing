@@ -43,7 +43,7 @@ runs:
   steps:
     - uses: percebus/github-actions-testing/.github/actions/test-reporter@main
       # TODO add successOrFail
-      if: ne(${{ inputs.reporter }}, '')
+      if: ${{ inputs.reporter != '' }}
       with:
         name: ${{ inputs.tests_name }}
         reporter: ${{ inputs.reporter }}
@@ -53,14 +53,14 @@ runs:
 
     - uses: percebus/github-actions-testing/.github/actions/test-summary@main
       # TODO add successOrFail
-      if: ne(${{ inputs.summary_title }}, '')
+      if: ${{ inputs.summary_title != '' }}
       with:
         title: ${{ inputs.summary_title }}
         files_pattern: ${{ inputs.files_pattern }}
 
     - uses: percebus/github-actions-testing/.github/actions/publish-test-deltas@main
       # TODO add successOrFail
-      if: ne(${{ inputs.files_pattern }}, '')
+      if: ${{ inputs.files_pattern != '' }}
       with:
         runs-on: ${{ inputs.runs-on }}
         files_pattern: ${{ inputs.files_pattern }}
