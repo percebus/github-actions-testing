@@ -9,6 +9,10 @@ permissions:
   actions: read
   checks: write
 
+env: # required
+  REPORTER: jest-junit
+  FILES_PATTERN: assets/test-results/jest/junit.xml
+
 jobs:
   default:
     name: default
@@ -17,11 +21,11 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-reporter
         with:
-          name: actions/test-reporter:jest-junit.xml @ ${{ matrix.OS }}
-          reporter: jest-junit
-          files_pattern: assets/test-results/jest/junit.xml
+          reporter: ${{ env.REPORTER }}
+          files_pattern: ${{ env.FILES_PATTERN }}
 
-  jest-junit:
+  jest-junit_matrix:
+    needs: default
     strategy:
       fail-fast: false
       max-parallel: 10
@@ -31,12 +35,36 @@ jobs:
           - ubuntu-latest
           - macos-latest
           - windows-latest
-    name: Upload jest-junit.xml
+    name: "@ ${{ matrix.OS }}"
     runs-on: ${{ matrix.OS }}
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-reporter
         with:
           name: actions/test-reporter:jest-junit.xml @ ${{ matrix.OS }}
-          reporter: jest-junit
-          files_pattern: assets/test-results/jest/junit.xml
+          reporter: ${{ env.REPORTER }}
+          files_pattern: ${{ env.FILES_PATTERN }}
+
+  list_matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        list-suites:
+          - true
+          - false
+
+        list-tests:
+          - true
+          - false
+    name: list-suites & tests
+    runs-on: ${{ matrix.OS }}
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-reporter
+        with:
+          reporter: ${{ env.REPORTER }}
+          files_pattern: ${{ env.FILES_PATTERN }}
+          list-suites: ${{ matrix.list-suites }}
+          list-tests: ${{ matrix.list-tests }}

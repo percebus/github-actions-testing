@@ -3,6 +3,9 @@ on:
   push:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
+env:
+  FILES_PATTERN: assets/test-results/jest/junit.xml
+
 jobs:
   default:
     name: default
@@ -11,7 +14,7 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-summary
         with:
-          files_pattern: assets/test-results/jest/junit.xml
+          files_pattern: ${{ env.FILES_PATTERN }}
 
   jest-junit:
     name: jest-junit.xml
@@ -32,4 +35,4 @@ jobs:
         with:
           name: actions/test-summary:jest-junit.xml @ ${{ matrix.OS }}
           title: actions/test-summary:Test Summary @ ${{ matrix.OS }}
-          files_pattern: assets/test-results/jest/junit.xml
+          files_pattern: ${{ env.FILES_PATTERN }}

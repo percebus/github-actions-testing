@@ -11,6 +11,9 @@ permissions:
   checks: write
   pull-requests: write
 
+env:
+  FILES_PATTERN: assets/test-results/jest/junit.xml
+
 jobs:
   default:
     name: default
@@ -19,9 +22,9 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
         with:
-          files_pattern: assets/test-results/jest/junit.xml
+          files_pattern: ${{ env.FILES_PATTERN }}
 
-  junit:
+  junit_matrix:
     needs: default
     strategy:
       max-parallel: 10
@@ -42,4 +45,4 @@ jobs:
         with:
           tests_name: actions/junit:jest-junit.xml @ ${{ matrix.OS }}
           summary_title: actions/junit:Test Summary @ ${{ matrix.OS }}
-          files_pattern: assets/test-results/jest/junit.xml
+          files_pattern: ${{ env.FILES_PATTERN }}

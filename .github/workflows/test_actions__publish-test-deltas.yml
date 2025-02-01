@@ -8,6 +8,9 @@ permissions:
   checks: write
   pull-requests: write
 
+env:
+  FILES_PATTERN: assets/test-results/jest/junit.xml
+
 jobs:
   default:
     name: default
@@ -16,9 +19,9 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/publish-test-deltas
         with:
-          files_pattern: assets/test-results/jest/junit.xml
+          files_pattern: ${{ env.FILES_PATTERN }}
 
-  junit-xml:
+  junit-xml_matrix:
     name: jest-junit.xml
     needs: default
     strategy:
@@ -39,4 +42,4 @@ jobs:
         with:
           name: actions/publish-test-deltas:jest-junit.xml @ ${{ matrix.OS }}
           runs-on: ${{ matrix.OS }}
-          files_pattern: assets/test-results/jest/junit.xml
+          files_pattern: ${{ env.FILES_PATTERN }}
