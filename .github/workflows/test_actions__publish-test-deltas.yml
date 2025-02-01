@@ -46,6 +46,7 @@ jobs:
 
   files_pattern_matrix:
     needs: default
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       max-parallel: 10
@@ -53,9 +54,8 @@ jobs:
         files_pattern:
           - assets/test-results/jest/junit.xml
           - assets/**/jest/junit.xml
-          - '**/*junit.xml'
-    runs-on: ${{ matrix.OS }}
-    name: ${{ matrix.OS }}
+          - "**/*junit.xml"
+    name: "files_pattern: ${{ matrix.files_pattern }}"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/publish-test-deltas
