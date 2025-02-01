@@ -21,7 +21,7 @@ permissions:
 
 #### Details
 
-![Provided error details](../../../assets/dorny/img/test-reporter/provided-error-details.png)
+![Provided error details](../../../assets/img/dorny/test-reporter/provided-error-details.png)
 
 ## References
 
