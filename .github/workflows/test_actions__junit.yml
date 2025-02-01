@@ -43,7 +43,7 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
         with:
-          tests_name: actions/junit:jest-junit.xml @ ${{ matrix.OS }}
+          tests_name: actions/junit:${{ env.REPORTER }} @ ${{ matrix.OS }}
           summary_title: actions/junit:Test Summary @ ${{ matrix.OS }}
           files_pattern: ${{ env.FILES_PATTERN }}
 
@@ -67,6 +67,8 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
         with:
+          tests_name: "actions/junit:${{ env.REPORTER }} list-suites:${{ matrix.list-suites }} list-tests:${{ matrix.list-tests }}"
+          summary_title: ""
           reporter: ${{ env.REPORTER }}
           files_pattern: ${{ env.FILES_PATTERN }}
           list-suites: ${{ matrix.list-suites }}
