@@ -56,11 +56,11 @@ runs:
       if: ${{ inputs.summary_title != '' }}
       with:
         title: ${{ inputs.summary_title }}
-        files_pattern: ${{ inputs.files_pattern }}
+        files_pattern: ${{ inputs.files_pattern || 'INVALID' }}
 
     - uses: percebus/github-actions-testing/.github/actions/publish-test-deltas@main
       # TODO add successOrFail
       if: ${{ inputs.files_pattern != '' }}
       with:
         runs-on: ${{ inputs.runs-on }}
-        files_pattern: ${{ inputs.files_pattern }}
+        files_pattern: ${{ inputs.files_pattern || 'INVALID' }}
