@@ -52,12 +52,14 @@ jobs:
       max-parallel: 10
       matrix:
         list-suites:
-          - true
-          - false
+          - all
+          - failed
+          - none
 
         list-tests:
-          - true
-          - false
+          - all
+          - failed
+          - none
     name: list-suites & tests
     runs-on: ubuntu-latest
     steps:
