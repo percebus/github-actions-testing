@@ -46,8 +46,8 @@ runs:
       if: ${{ inputs.reporter != '' }}
       with:
         name: ${{ inputs.tests_name }}
-        reporter: ${{ inputs.reporter }}
-        files_pattern: ${{ inputs.files_pattern }}
+        reporter: ${{ inputs.reporter || 'jest-junit' }}
+        files_pattern: ${{ inputs.files_pattern || 'INVALID' }}
         list-suites: ${{ inputs.list-suites }}
         list-tests: ${{ inputs.list-tests }}
 
