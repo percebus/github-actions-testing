@@ -42,7 +42,8 @@ runs:
   using: composite
   steps:
     - uses: percebus/github-actions-testing/.github/actions/test-reporter@main
-      if: always()
+      # TODO add successOrFail
+      if: ne(${{ inputs.reporter }}, '')
       with:
         name: ${{ inputs.tests_name }}
         reporter: ${{ inputs.reporter }}
@@ -51,13 +52,15 @@ runs:
         list-tests: ${{ inputs.list-tests }}
 
     - uses: percebus/github-actions-testing/.github/actions/test-summary@main
-      if: always()
+      # TODO add successOrFail
+      if: ne(${{ inputs.summary_title }}, '')
       with:
         title: ${{ inputs.summary_title }}
         files_pattern: ${{ inputs.files_pattern }}
 
     - uses: percebus/github-actions-testing/.github/actions/publish-test-deltas@main
-      if: always()
+      # TODO add successOrFail
+      if: ne(${{ inputs.files_pattern }}, '')
       with:
         runs-on: ${{ inputs.runs-on }}
         files_pattern: ${{ inputs.files_pattern }}
