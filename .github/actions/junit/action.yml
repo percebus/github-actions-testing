@@ -32,6 +32,11 @@ inputs:
     required: false
     default: failed
 
+  publish-test-deltas:
+    description: Publish test deltas
+    required: false
+    default: "true"
+
   # publish-test-deltas inputs
   runs-on:
     description: The OS to run the action on.
@@ -41,9 +46,14 @@ inputs:
 runs:
   using: composite
   steps:
+    - run: echo "Preparing percebus/github-actions-testing/.../actions/junit..."
+      # NOTE: Force even if npm test failed
+      if: success() || failure()
+      shell: bash
+      name: Run junit action
+
     - uses: percebus/github-actions-testing/.github/actions/test-reporter@main
-      # TODO add successOrFail
-      if: ${{ inputs.files_pattern != '' }}
+      if: ${{ inputs.reporter != '' }}
       with:
         name: ${{ inputs.tests_name }}
         reporter: ${{ inputs.reporter || 'jest-junit' }}
@@ -52,15 +62,13 @@ runs:
         list-tests: ${{ inputs.list-tests }}
 
     - uses: percebus/github-actions-testing/.github/actions/test-summary@main
-      # TODO add successOrFail
-      if: ${{ inputs.files_pattern != '' }}
+      if: ${{ inputs.summary_title != '' }}
       with:
         title: ${{ inputs.summary_title }}
         files_pattern: ${{ inputs.files_pattern || 'INVALID' }}
 
     - uses: percebus/github-actions-testing/.github/actions/publish-test-deltas@main
-      # TODO add successOrFail
-      if: ${{ inputs.files_pattern != '' }}
+      if: ${{ inputs.publish-test-deltas == 'true' }}
       with:
         runs-on: ${{ inputs.runs-on }}
         files_pattern: ${{ inputs.files_pattern || 'INVALID' }}
