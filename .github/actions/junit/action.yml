@@ -32,12 +32,12 @@ inputs:
     required: false
     default: failed
 
+  # publish-test-deltas inputs
   publish-test-deltas:
     description: Publish test deltas
     required: false
     default: "true"
 
-  # publish-test-deltas inputs
   runs-on:
     description: The OS to run the action on.
     required: false
