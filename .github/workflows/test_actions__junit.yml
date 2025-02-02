@@ -43,11 +43,15 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
         with:
-          tests_name: actions/junit:${{ env.REPORTER }} @ ${{ matrix.OS }}
-          summary_title: actions/junit:Test Summary @ ${{ matrix.OS }}
           files_pattern: ${{ env.FILES_PATTERN }}
+          # test-reporter
+          tests_name: actions/junit:${{ env.REPORTER }} @ ${{ matrix.OS }}
+          # test-summary
+          summary_title: actions/junit:Test Summary @ ${{ matrix.OS }}
+          # publish-test-deltas
+          # publish-test-deltas: "true"
 
-  list_matrix:
+  test-reporter_only_list_matrix:
     needs: default
     strategy:
       fail-fast: false
@@ -67,9 +71,34 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/junit
         with:
-          tests_name: "actions/junit:${{ env.REPORTER }} list-suites:${{ matrix.list-suites }} list-tests:${{ matrix.list-tests }}"
-          summary_title: ""
-          reporter: ${{ env.REPORTER }}
           files_pattern: ${{ env.FILES_PATTERN }}
+          # test-reporter
+          reporter: ${{ env.REPORTER }}
+          tests_name: "actions/junit:${{ env.REPORTER }} list-suites:${{ matrix.list-suites }} list-tests:${{ matrix.list-tests }}"
           list-suites: ${{ matrix.list-suites }}
           list-tests: ${{ matrix.list-tests }}
+          # test-summary
+          summary_title: ""
+          # publish-test-deltas
+          publish-test-deltas: "false"
+
+  publish-test-deltas_only_matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        publish-test-deltas:
+          - "true"
+          - "false"
+
+    name: "publish-test-deltas: ${{ matrix.publish-test-deltas }}"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/junit
+        with:
+          files_pattern: ${{ env.FILES_PATTERN }}
+          reporter: ""
+          summary_title: ""
+          publish-test-deltas: ${{ matrix.publish-test-deltas }}
