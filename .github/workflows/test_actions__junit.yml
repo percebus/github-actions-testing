@@ -24,6 +24,10 @@ jobs:
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
 
+          # publish-test-deltas
+          comment_mode: off
+
+
   os__matrix:
     needs: default
     strategy:
@@ -44,12 +48,17 @@ jobs:
       - uses: ./.github/actions/junit
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
+
           # test-reporter
           tests_name: actions/junit:${{ env.REPORTER }} @ ${{ matrix.OS }}
+
           # test-summary
           summary_title: actions/junit:Test Summary @ ${{ matrix.OS }}
+
           # publish-test-deltas
           # publish-test-deltas: "true"
+          comment_mode: off
+
 
   test-reporter_only_list__matrix:
     needs: default
@@ -72,15 +81,19 @@ jobs:
       - uses: ./.github/actions/junit
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
+
           # test-reporter
           reporter: ${{ env.REPORTER }}
           tests_name: "actions/junit:${{ env.REPORTER }} list-suites:${{ matrix.list-suites }} list-tests:${{ matrix.list-tests }}"
           list-suites: ${{ matrix.list-suites }}
           list-tests: ${{ matrix.list-tests }}
+
           # test-summary
           summary_title: ""
+
           # publish-test-deltas
           publish-test-deltas: "false"
+
 
   publish-test-deltas_only__matrix:
     needs: default
@@ -102,3 +115,4 @@ jobs:
           reporter: ""
           summary_title: ""
           publish-test-deltas: ${{ matrix.publish-test-deltas }}
+          comment_mode: off # XXX?

@@ -21,6 +21,7 @@ jobs:
       - uses: ./.github/actions/publish-test-deltas
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
+          comment_mode: off
 
   os__matrix:
     needs: default
@@ -43,6 +44,7 @@ jobs:
         with:
           runs-on: ${{ matrix.OS }}
           files_pattern: ${{ env.FILES_PATTERN }}
+          comment_mode: off
 
   files_pattern__matrix:
     needs: default
@@ -61,6 +63,7 @@ jobs:
       - uses: ./.github/actions/publish-test-deltas
         with:
           files_pattern: ${{ matrix.files_pattern }}
+          comment_mode: off
 
   comment_mode__matrix:
     needs: default
@@ -83,6 +86,7 @@ jobs:
       - uses: ./.github/actions/publish-test-deltas
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
+          comment_title: "comment_mode: ${{ matrix.comment_mode }}"
           comment_mode: ${{ matrix.comment_mode }}
 
   comment_title__matrix:
@@ -92,10 +96,10 @@ jobs:
       max-parallel: 10
       matrix:
         comment_title:
-          - Bananas
-          - Pijamas
+          - "comment_title: Bananas"
+          - "comment_title: Pijamas"
     runs-on: ubuntu-latest
-    name: "comment_title: ${{ matrix.comment_title }}"
+    name: ${{ matrix.comment_title }}
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/publish-test-deltas
@@ -120,6 +124,7 @@ jobs:
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
           check_name: ${{ matrix.check_name }}
+          comment_mode: off
 
   ignore_runs__matrix:
     needs: default
@@ -138,3 +143,4 @@ jobs:
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
           ignore_runs: ${{ matrix.ignore_runs }}
+          comment_mode: off
