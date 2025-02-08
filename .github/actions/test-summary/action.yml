@@ -4,7 +4,7 @@ inputs:
   files_pattern:
     description: test results files to collect and publish
     required: false
-    default: test-results.xml
+    default: ""
 
   summary:
     description: Add a summary of the results at the top of the report
@@ -24,7 +24,7 @@ inputs:
   display-options:
     description: Select which results should be included in the report.
     required: false
-    default: fEX
+    default: ""
 
   fail-on-empty:
     description: Fail the workflow if no JUnit XML was found.
@@ -34,7 +34,7 @@ inputs:
   title:
     description: title of the test results section in the workflow summary
     required: false
-    default: Test results
+    default: ""
 
 runs:
   using: composite
@@ -46,17 +46,17 @@ runs:
         # A list of JUnit XML files, directories containing the former, and wildcard
         # patterns to process.
         # See @actions/glob for supported patterns.
-        path: ${{ inputs.files_pattern }}
+        path: ${{ inputs.files_pattern || "test-results.xml" }}
 
         # (Optional) Add a summary of the results at the top of the report
         summary: ${{ inputs.summary }}
 
         # (Optional) Select which results should be included in the report.
         # Follows the same syntax as `pytest -r`
-        display-options: ${{ inputs.display-options }}
+        display-options: ${{ inputs.display-options || "fEX" }}
 
         # (Optional) Fail the workflow if no JUnit XML was found.
         fail-on-empty: ${{ inputs.fail-on-empty }}
 
         # (Optional) Title of the test results section in the workflow summary
-        title: ${{ inputs.title }}
+        title: ${{ inputs.title || "Tests Summary" }}

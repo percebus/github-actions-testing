@@ -14,23 +14,23 @@ inputs:
   tests_name:
     description: The name of the tests.
     required: false
-    default: Unit Tests
+    default: ""
 
   summary_title:
     description: The title of the test summary.
     required: false
-    default: Unit Tests Summary
+    default: ""
 
   # test-reporter inputs
   list-suites:
     description: Limits which test suites are listed
     required: false
-    default: all
+    default: ""
 
   list-tests:
     description: Limits which test cases are listed
     required: false
-    default: failed
+    default: ""
 
   # publish-test-deltas inputs
   publish-test-deltas:
@@ -56,17 +56,17 @@ inputs:
   comment_mode:
     description: The action posts comments to pull requests that are associated with the commit.
     required: false
-    default: always
+    default: ""
 
   comment_title:
     description: An alternative name for the pull request comment.
     required: false
-    default: Publish Deltas
+    default: ""
 
   check_name:
     description: An alternative name for the check result.
     required: false
-    default: Publish Deltas
+    default: ""
 
 runs:
   using: composite
@@ -80,7 +80,7 @@ runs:
     - uses: percebus/github-actions-testing/.github/actions/test-reporter@main
       if: ${{ inputs.reporter != '' }}
       with:
-        name: ${{ inputs.tests_name }}
+        name: ${{ inputs.tests_name || "" }}
         reporter: ${{ inputs.reporter || 'jest-junit' }}
         files_pattern: ${{ inputs.files_pattern || 'INVALID' }}
         list-suites: ${{ inputs.list-suites }}
@@ -90,7 +90,7 @@ runs:
       if: ${{ inputs.summary_title != '' }}
       with:
         title: ${{ inputs.summary_title }}
-        files_pattern: ${{ inputs.files_pattern || 'INVALID' }}
+        files_pattern: ${{ inputs.files_pattern }}
 
     - uses: percebus/github-actions-testing/.github/actions/publish-test-deltas@main
       if: ${{ inputs.publish-test-deltas == 'true' }}

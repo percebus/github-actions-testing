@@ -12,7 +12,7 @@ inputs:
   name:
     description: GitHub action "run name"
     required: false
-    default: Unit Tests
+    default: ""
 
   fail-on-empty:
     description: Set this action as failed if no test results were found
@@ -40,20 +40,20 @@ inputs:
     default: tests
 
   list-suites:
-    description: Limits which test suites are listed
+    description: Limits which || "all" test suites are listed
     required: false
-    default: all
+    default: ""
 
   list-tests:
     description: Limits which test cases are listed
     required: false
-    default: failed
+    default: ""
 
   # Must be less or equal to 50.
   max-annotations:
     description: Limits number of created annotations with error message and stack trace captured during test execution.
     required: false
-    default: "50"
+    default: ""
 
 runs:
   using: composite
@@ -64,7 +64,7 @@ runs:
       if: always()
       with:
         # Name of the Check Run which will be created
-        name: ${{ inputs.name }}
+        name: ${{ inputs.name || "Tests Results" }}
 
         # Name or regex of artifact containing test results
         # Regular expression must be enclosed in '/'.
@@ -108,17 +108,17 @@ runs:
         #   all
         #   failed
         #   none
-        list-suites: ${{ inputs.list-suites }}
+        list-suites: ${{ inputs.list-suites || "all" }}
 
         # Limits which test cases are listed:
         #   all
         #   failed
         #   none
-        list-tests: ${{ inputs.list-tests }}
+        list-tests: ${{ inputs.list-tests || "failed" }}
 
         # Limits number of created annotations with error message and stack trace captured during test execution.
         # Must be less or equal to 50.
-        max-annotations: ${{ inputs.max-annotations }}
+        max-annotations: ${{ inputs.max-annotations || "50" }}
 
         # Set action as failed if test report contains any failed test
         fail-on-error: ${{ inputs.fail-on-error }}
