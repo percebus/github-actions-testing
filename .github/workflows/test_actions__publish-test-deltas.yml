@@ -21,8 +21,9 @@ jobs:
       - uses: ./.github/actions/publish-test-deltas
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
+          comment_mode: off
 
-  os_matrix:
+  os__matrix:
     needs: default
     strategy:
       fail-fast: false
@@ -43,8 +44,9 @@ jobs:
         with:
           runs-on: ${{ matrix.OS }}
           files_pattern: ${{ env.FILES_PATTERN }}
+          comment_mode: off
 
-  files_pattern_matrix:
+  files_pattern__matrix:
     needs: default
     runs-on: ubuntu-latest
     strategy:
@@ -61,3 +63,84 @@ jobs:
       - uses: ./.github/actions/publish-test-deltas
         with:
           files_pattern: ${{ matrix.files_pattern }}
+          comment_mode: off
+
+  comment_mode__matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        comment_mode:
+          - always
+          - changes
+          - changes in failures
+          - changes in errors
+          - failures
+          - errors
+          - "off"
+    runs-on: ubuntu-latest
+    name: "comment_mode: ${{ matrix.comment_mode }}"
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/publish-test-deltas
+        with:
+          files_pattern: ${{ env.FILES_PATTERN }}
+          comment_title: "comment_mode: ${{ matrix.comment_mode }}"
+          comment_mode: ${{ matrix.comment_mode }}
+
+  comment_title__matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        comment_title:
+          - "comment_title: Bananas"
+          - "comment_title: Pijamas"
+    runs-on: ubuntu-latest
+    name: ${{ matrix.comment_title }}
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/publish-test-deltas
+        with:
+          files_pattern: ${{ env.FILES_PATTERN }}
+          comment_title: ${{ matrix.comment_title }}
+
+  check_name__matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        check_name:
+          - Checkity
+          - Checked
+    runs-on: ubuntu-latest
+    name: "check_name: ${{ matrix.check_name }}"
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/publish-test-deltas
+        with:
+          files_pattern: ${{ env.FILES_PATTERN }}
+          check_name: ${{ matrix.check_name }}
+          comment_mode: off
+
+  ignore_runs__matrix:
+    needs: default
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        ignore_runs:
+          - true
+          - false
+    runs-on: ubuntu-latest
+    name: "ignore_runs: ${{ matrix.ignore_runs }}"
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/publish-test-deltas
+        with:
+          files_pattern: ${{ env.FILES_PATTERN }}
+          ignore_runs: ${{ matrix.ignore_runs }}
+          comment_mode: off
