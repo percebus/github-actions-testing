@@ -85,7 +85,6 @@ jobs:
           files_pattern: ${{ env.FILES_PATTERN }}
           comment_mode: ${{ matrix.comment_mode }}
 
-
   comment_title__matrix:
     needs: default
     strategy:
