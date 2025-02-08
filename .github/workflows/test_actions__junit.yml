@@ -27,7 +27,6 @@ jobs:
           # publish-test-deltas
           comment_mode: off
 
-
   os__matrix:
     needs: default
     strategy:
@@ -58,7 +57,6 @@ jobs:
           # publish-test-deltas
           # publish-test-deltas: "true"
           comment_mode: off
-
 
   test-reporter_only_list__matrix:
     needs: default
@@ -93,7 +91,6 @@ jobs:
 
           # publish-test-deltas
           publish-test-deltas: "false"
-
 
   publish-test-deltas_only__matrix:
     needs: default
