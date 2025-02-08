@@ -43,7 +43,7 @@ inputs:
     default: Publish Deltas
 
   # Required to be unique for each instance in one workflow.
-  check-name:
+  check_name:
     description: An alternative name for the check result.
     required: false
     default: Publish Deltas

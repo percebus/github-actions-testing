@@ -63,7 +63,7 @@ inputs:
     required: false
     default: Publish Deltas
 
-  check-name:
+  check_name:
     description: An alternative name for the check result.
     required: false
     default: Publish Deltas
@@ -101,4 +101,4 @@ runs:
         ignore_runs: ${{ inputs.ignore_runs }}
         comment_mode: ${{ inputs.comment_mode }}
         comment_title: ${{ inputs.comment_title }}
-        check_name: ${{ inputs.check-name }}
+        check_name: ${{ inputs.check_name }}
