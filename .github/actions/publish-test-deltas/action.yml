@@ -34,19 +34,19 @@ inputs:
   comment_mode:
     description: The action posts comments to pull requests that are associated with the commit.
     required: false
-    default: ""
+    default: always
 
   # same as `check_name``
   comment_title:
     description: An alternative name for the pull request comment.
     required: false
-    default: ""
+    default: Publish Deltas
 
   # Required to be unique for each instance in one workflow.
   check_name:
     description: An alternative name for the check result.
     required: false
-    default: ""
+    default: Publish Deltas
 
 runs:
   using: composite
@@ -58,10 +58,10 @@ runs:
       with:
         files: ${{ inputs.files_pattern }}
         ignore_runs: ${{ inputs.ignore_runs }}
-        large_files: ${{ inputs.large_files || (inputs.ignore_runs == 'true') }}
-        comment_mode: ${{ inputs.comment_mode || 'always' }}
-        comment_title: ${{ inputs.comment_title || 'Publish Deltas' }}
-        check_name: ${{ inputs.check_name || 'Publish Deltas' }}
+        large_files: ${{ inputs.ignore_runs == 'true' }}
+        comment_mode: ${{ inputs.comment_mode }}
+        comment_title: ${{ inputs.comment_title }}
+        check_name: ${{ inputs.check_name }}
 
     # FIXME
     # - name: publish-unit-test-result-action @ macos
