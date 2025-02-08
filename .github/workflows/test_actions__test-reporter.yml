@@ -24,7 +24,7 @@ jobs:
           reporter: ${{ env.REPORTER }}
           files_pattern: ${{ env.FILES_PATTERN }}
 
-  os_matrix:
+  os__matrix:
     needs: default
     strategy:
       fail-fast: false
@@ -45,7 +45,7 @@ jobs:
           reporter: ${{ env.REPORTER }}
           files_pattern: ${{ env.FILES_PATTERN }}
 
-  list_matrix:
+  list__matrix:
     needs: default
     strategy:
       fail-fast: false

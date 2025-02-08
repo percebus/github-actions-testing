@@ -1,6 +1,11 @@
 name: publish-test-deltas
 description: A wrapper around EnricoMi's publish-unit-test-result-action.
 inputs:
+  runs-on:
+    description: OS to run the action on
+    required: false
+    default: ubuntu-latest
+
   # test-results/**/*.xml
   # test-results/**/*.trx
   # test-results/**/*.json
@@ -8,10 +13,40 @@ inputs:
     description: test results files to collect and publish
     required: true
 
-  runs-on:
-    description: OS to run the action on
+  large_files:
+    description: Support for large files is enabled when set to true. Defaults to false, unless ignore_runs is true.
+    default: "false" # ignore_runs == true
     required: false
-    default: ubuntu-latest
+
+  ignore_runs:
+    description: Does not collect test run information from the test result files, which is useful for very large files. This disables any check run annotations.
+    default: "false"
+    required: false
+
+  # Set to:
+  # - always - always comment
+  # - changes - comment when changes w.r.t. the target branch exist
+  # - changes in failures - when changes in the number of failures and errors exist
+  # - changes in errors - when changes in the number of (only) errors exist
+  # - failures - when failures or errors exist
+  # - errors - when (only) errors exist
+  # - off - to not create pull request comments.
+  comment_mode:
+    description: The action posts comments to pull requests that are associated with the commit.
+    required: false
+    default: always
+
+  # same as `check_name``
+  comment_title:
+    description: An alternative name for the pull request comment.
+    required: false
+    default: Publish Deltas
+
+  # Required to be unique for each instance in one workflow.
+  check-name:
+    description: An alternative name for the check result.
+    required: false
+    default: Publish Deltas
 
 runs:
   using: composite
@@ -22,6 +57,11 @@ runs:
       # if: (success() || failure()) && startsWith(${{ inputs.runs-on }}, 'ubuntu') # FIXME
       with:
         files: ${{ inputs.files_pattern }}
+        ignore_runs: ${{ inputs.ignore_runs }}
+        large_files: ${{ inputs.ignore_runs == 'true' }}
+        comment_mode: ${{ inputs.comment_mode }}
+        comment_title: ${{ inputs.comment_title }}
+        check_name: ${{ inputs.check_name }}
 
     # FIXME
     # - name: publish-unit-test-result-action @ macos

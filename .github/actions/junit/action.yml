@@ -43,6 +43,31 @@ inputs:
     required: false
     default: ubuntu-latest
 
+  large_files:
+    description: Support for large files is enabled when set to true. Defaults to false, unless ignore_runs is true.
+    default: "false" # ignore_runs == true
+    required: false
+
+  ignore_runs:
+    description: Does not collect test run information from the test result files, which is useful for very large files. This disables any check run annotations.
+    default: "false"
+    required: false
+
+  comment_mode:
+    description: The action posts comments to pull requests that are associated with the commit.
+    required: false
+    default: always
+
+  comment_title:
+    description: An alternative name for the pull request comment.
+    required: false
+    default: Publish Deltas
+
+  check-name:
+    description: An alternative name for the check result.
+    required: false
+    default: Publish Deltas
+
 runs:
   using: composite
   steps:
@@ -72,3 +97,8 @@ runs:
       with:
         runs-on: ${{ inputs.runs-on }}
         files_pattern: ${{ inputs.files_pattern || 'INVALID' }}
+        large_files: ${{ inputs.large_files }}
+        ignore_runs: ${{ inputs.ignore_runs }}
+        comment_mode: ${{ inputs.comment_mode }}
+        comment_title: ${{ inputs.comment_title }}
+        check_name: ${{ inputs.check-name }}

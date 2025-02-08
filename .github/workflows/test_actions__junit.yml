@@ -24,7 +24,7 @@ jobs:
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
 
-  os_matrix:
+  os__matrix:
     needs: default
     strategy:
       max-parallel: 10
@@ -51,7 +51,7 @@ jobs:
           # publish-test-deltas
           # publish-test-deltas: "true"
 
-  test-reporter_only_list_matrix:
+  test-reporter_only_list__matrix:
     needs: default
     strategy:
       fail-fast: false
@@ -82,7 +82,7 @@ jobs:
           # publish-test-deltas
           publish-test-deltas: "false"
 
-  publish-test-deltas_only_matrix:
+  publish-test-deltas_only__matrix:
     needs: default
     strategy:
       fail-fast: false

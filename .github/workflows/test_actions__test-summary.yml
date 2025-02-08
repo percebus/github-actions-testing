@@ -16,7 +16,7 @@ jobs:
         with:
           files_pattern: ${{ env.FILES_PATTERN }}
 
-  os_matrix:
+  os__matrix:
     needs: default
     strategy:
       fail-fast: false
