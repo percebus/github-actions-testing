@@ -12,7 +12,7 @@ inputs:
   name:
     description: GitHub action "run name"
     required: false
-    default: Unit Tests
+    default: Tests Results
 
   fail-on-empty:
     description: Set this action as failed if no test results were found

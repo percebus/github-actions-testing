@@ -14,12 +14,12 @@ inputs:
   tests_name:
     description: The name of the tests.
     required: false
-    default: Unit Tests
+    default: Tests Results
 
   summary_title:
     description: The title of the test summary.
     required: false
-    default: Unit Tests Summary
+    default: Tests Results Summary
 
   # test-reporter inputs
   list-suites:
@@ -61,12 +61,12 @@ inputs:
   comment_title:
     description: An alternative name for the pull request comment.
     required: false
-    default: Publish Deltas
+    default: Tests Deltas
 
   check_name:
     description: An alternative name for the check result.
     required: false
-    default: Publish Deltas
+    default: Tests Deltas
 
 runs:
   using: composite

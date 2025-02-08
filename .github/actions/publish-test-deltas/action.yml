@@ -40,13 +40,13 @@ inputs:
   comment_title:
     description: An alternative name for the pull request comment.
     required: false
-    default: Publish Deltas
+    default: Tests Deltas
 
   # Required to be unique for each instance in one workflow.
   check_name:
     description: An alternative name for the check result.
     required: false
-    default: Publish Deltas
+    default: Tests Deltas
 
 runs:
   using: composite
