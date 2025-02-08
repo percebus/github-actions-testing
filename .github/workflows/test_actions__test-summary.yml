@@ -33,6 +33,5 @@ jobs:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
       - uses: ./.github/actions/test-summary
         with:
-          name: actions/test-summary:jest-junit.xml @ ${{ matrix.OS }}
           title: actions/test-summary:Test Summary @ ${{ matrix.OS }}
           files_pattern: ${{ env.FILES_PATTERN }}
