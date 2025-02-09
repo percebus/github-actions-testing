@@ -79,7 +79,7 @@ runs:
       name: Run junit action
 
     - uses: percebus/github-actions-testing/.github/actions/test-reporter@main
-      if: ${{ inputs.tests_name != '' }}
+      if: ${{ inputs.reporter != '' && inputs.tests_name != '' }}
       with:
         name: ${{ inputs.tests_name }}
         reporter: ${{ inputs.reporter || 'jest-junit' }}
