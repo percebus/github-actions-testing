@@ -1,27 +1,22 @@
 name: junit
 description: junit
 inputs:
-  reporter:
-    description: The test reporter to use.
-    required: false
-    default: jest-junit
-
   files_pattern:
     description: The pattern to match the test result files. i.e. 'junit.xml'
     required: false
     default: junit.xml
+
+  # test-reporter inputs
+  reporter:
+    description: The test reporter to use.
+    required: false
+    default: jest-junit
 
   tests_name:
     description: The name of the tests.
     required: false
     default: Tests Results
 
-  summary_title:
-    description: The title of the test summary.
-    required: false
-    default: Tests Results Summary
-
-  # test-reporter inputs
   list-suites:
     description: Limits which test suites are listed
     required: false
@@ -31,6 +26,12 @@ inputs:
     description: Limits which test cases are listed
     required: false
     default: failed
+
+  # test-summary inputs
+  summary_title:
+    description: The title of the test summary.
+    required: false
+    default: Tests Results Summary
 
   # publish-test-deltas inputs
   publish-test-deltas:
@@ -78,7 +79,7 @@ runs:
       name: Run junit action
 
     - uses: percebus/github-actions-testing/.github/actions/test-reporter@main
-      if: ${{ inputs.reporter != '' }}
+      if: ${{ inputs.tests_name != '' }}
       with:
         name: ${{ inputs.tests_name }}
         reporter: ${{ inputs.reporter || 'jest-junit' }}
