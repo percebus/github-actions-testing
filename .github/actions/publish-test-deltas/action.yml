@@ -46,7 +46,7 @@ inputs:
   check_name:
     description: An alternative name for the check result.
     required: false
-    default: Tests Deltas
+    default: Test Results Deltas
 
 runs:
   using: composite
