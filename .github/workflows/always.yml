@@ -5,12 +5,6 @@ on:
 
 jobs:
   lint:
-    name: npm run lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: percebus/github-actions-common/.github/actions/checkout@main
-      - uses: percebus/github-actions-node/.github/actions/setup@main
-      - uses: percebus/github-actions-npm/.github/actions/npm_install@main
-
-      - name: npm run lint
-        run: npm run lint
+    uses: percebus/github-actions-npm/.github/workflows/npm_run_script.yml@main
+    with:
+      script: lint
