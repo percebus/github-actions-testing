@@ -1,4 +1,10 @@
-The UnLicense
+# LICENSES
+
+## SRC
+
+See [under `actions/`](../actions/)
+
+## The UnLicense
 
 This is free and unencumbered software released into the public domain.
 
@@ -26,6 +32,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 
 -------------------------------------------------------------
+
+## Apache License
 
                                  Apache License
                            Version 2.0, January 2004
@@ -231,9 +239,9 @@ For more information, please refer to <https://unlicense.org>
 
 ----------------------------------------------------------------------------
 
-# The MIT License (MIT)
+## The MIT License (MIT)
 
-## Copyright (c) 2021 Michal Dorner and contributors
+### Copyright (c) 2021 Michal Dorner and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -255,9 +263,9 @@ THE SOFTWARE.
 
 ------------------------------------------------------------------------------
 
-# BSD 3-Clause License
+## BSD 3-Clause License
 
-## Copyright (c) 2023, Philip Meier
+### Copyright (c) 2023, Philip Meier
 
 All rights reserved.
 
