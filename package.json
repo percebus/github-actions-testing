@@ -28,7 +28,7 @@
     "integration"
   ],
   "author": "JCystems",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
     "url": "https://github.com/percebus/github-actions-testing/issues"
   },
