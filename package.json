@@ -4,9 +4,9 @@
   "description": "Common GitHub actions for testing",
   "main": "index.js",
   "scripts": {
-    "prettier": "prettier .",
-    "prettier:check": "npm run prettier -- --check",
-    "prettier:write": "npm run prettier -- --write",
+    "_prettier": "prettier .",
+    "prettier:check": "npm run _prettier -- --check",
+    "prettier:write": "npm run _prettier -- --write",
     "lint": "npm run prettier:check",
     "style": "npm run prettier:write",
     "poststyle": "npm run lint",

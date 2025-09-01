@@ -1,5 +1,9 @@
 # test-reporter
 
+[![Test actions/test-reporter](https://github.com/percebus/github-actions-testing/actions/workflows/test_actions__test-reporter.yml/badge.svg)](https://github.com/percebus/github-actions-testing/actions/workflows/test_actions__test-reporter.yml)
+
+[`LICENSE`](./LICENSE)
+
 ## permissions
 
 [Recommended setup for public repositories](https://github.com/dorny/test-reporter?tab=readme-ov-file#recommended-setup-for-public-repositories)
