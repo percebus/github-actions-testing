@@ -1,5 +1,9 @@
 # publish-test-deltas
 
+[![Test actions/publish-test-deltas](https://github.com/percebus/github-actions-testing/actions/workflows/test_actions__publish-test-deltas.yml/badge.svg)](https://github.com/percebus/github-actions-testing/actions/workflows/test_actions__publish-test-deltas.yml)
+
+[`LICENSE`](./LICENSE)
+
 ## permissions
 
 [Permissions](https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file#permissions)
