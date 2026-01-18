@@ -60,7 +60,7 @@ runs:
   steps:
     # SRC: https://github.com/dorny/test-reporter?tab=readme-ov-file#usage
     - name: test-reporter
-      uses: dorny/test-reporter@v1.9.1
+      uses: dorny/test-reporter@v2.5.0 # TODO bump
       if: always()
       with:
         # Name of the Check Run which will be created
