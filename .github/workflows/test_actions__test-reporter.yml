@@ -65,7 +65,7 @@ jobs:
             reporter: jest-junit
 
           - files_pattern: assets/test-results/pytest/test-results.xml
-            reporter: pytest
+            reporter: python-xunit
 
     name: "files_pattern: ${{ matrix.files_pattern }}"
     steps:
