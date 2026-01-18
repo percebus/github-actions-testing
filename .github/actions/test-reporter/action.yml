@@ -77,7 +77,7 @@ runs:
 
         # Comma-separated list of paths to test results
         # Supports wildcards via [fast-glob](https://github.com/mrmlnc/fast-glob)
-        # All matched result files must be of the same format.
+        # All matched result files must be of the same format
         path: ${{ inputs.files_pattern }}
 
         # Format of test results. Supported options:
@@ -85,10 +85,14 @@ runs:
         #   dotnet-nunit
         #   dotnet-trx
         #   flutter-json
+        #   golang-json
         #   java-junit
         #   jest-junit
         #   mocha-json
+        #   phpunit-junit
+        #   python-xunit
         #   rspec-json
+        #   swift-xunit
         reporter: ${{ inputs.reporter }}
 
         # Allows you to generate only the summary.
