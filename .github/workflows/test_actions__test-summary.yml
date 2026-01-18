@@ -54,6 +54,7 @@ jobs:
         files_pattern:
           - assets/test-results/jest/junit.xml
           - assets/test-results/pytest/test-results.xml
+
     name: "files_pattern: ${{ matrix.files_pattern }}"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main

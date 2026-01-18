@@ -139,7 +139,7 @@ jobs:
     name: "files_pattern: ${{ matrix.files_pattern }}"
     steps:
       - uses: percebus/github-actions-common/.github/actions/checkout@main
-      - uses: ./.github/actions/test-reporter
+      - uses: ./.github/actions/junit
         with:
           files_pattern: ${{ matrix.files_pattern }}
           reporter: ${{ matrix.reporter }}
