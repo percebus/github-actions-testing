@@ -64,6 +64,7 @@ jobs:
       max-parallel: 10
       matrix:
         files_pattern:
+          - assets/test-results/pytest/test-results.xml
           - assets/test-results/jest/junit.xml
           - assets/**/jest/junit.xml
           - "**/*junit.xml"
@@ -73,8 +74,8 @@ jobs:
       - uses: ./.github/actions/publish-test-deltas
         with:
           files_pattern: ${{ matrix.files_pattern }}
-          comment_mode: off
           check_name: "actions/publish-test-deltas: files_pattern:${{ matrix.files_pattern }}"
+          comment_mode: off
 
   comment_mode__matrix:
     needs: default
