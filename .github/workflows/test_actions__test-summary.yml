@@ -1,8 +1,11 @@
 name: Test actions/test-summary
 
 on:
-  push:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+  pull_request:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -40,3 +43,21 @@ jobs:
         with:
           title: actions/test-summary:Test Summary @ ${{ matrix.OS }}
           files_pattern: ${{ env.FILES_PATTERN }}
+
+  files_pattern__matrix:
+    needs: default
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        files_pattern:
+          - assets/test-results/jest/junit.xml
+          - assets/test-results/pytest/test-results.xml
+
+    name: "files_pattern: ${{ matrix.files_pattern }}"
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/test-summary
+        with:
+          files_pattern: ${{ matrix.files_pattern }}

@@ -40,7 +40,7 @@ runs:
   using: composite
   steps:
     - name: pytest-results-action
-      uses: pmeier/pytest-results-action@v0.7.1 # FIXME
+      uses: pmeier/pytest-results-action@v0.7.2 # TODO bump
       if: always()
       with:
         # A list of JUnit XML files, directories containing the former, and wildcard

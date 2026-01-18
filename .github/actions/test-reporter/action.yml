@@ -60,7 +60,7 @@ runs:
   steps:
     # SRC: https://github.com/dorny/test-reporter?tab=readme-ov-file#usage
     - name: test-reporter
-      uses: dorny/test-reporter@v1.9.1
+      uses: dorny/test-reporter@v2.5.0 # TODO bump
       if: always()
       with:
         # Name of the Check Run which will be created
@@ -77,7 +77,7 @@ runs:
 
         # Comma-separated list of paths to test results
         # Supports wildcards via [fast-glob](https://github.com/mrmlnc/fast-glob)
-        # All matched result files must be of the same format.
+        # All matched result files must be of the same format
         path: ${{ inputs.files_pattern }}
 
         # Format of test results. Supported options:
@@ -85,10 +85,14 @@ runs:
         #   dotnet-nunit
         #   dotnet-trx
         #   flutter-json
+        #   golang-json
         #   java-junit
         #   jest-junit
         #   mocha-json
+        #   phpunit-junit
+        #   python-xunit
         #   rspec-json
+        #   swift-xunit
         reporter: ${{ inputs.reporter }}
 
         # Allows you to generate only the summary.

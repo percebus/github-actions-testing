@@ -8,11 +8,12 @@
     "prettier:check": "npm run _prettier -- --check",
     "prettier:write": "npm run _prettier -- --write",
     "lint": "npm run prettier:check",
-    "style": "npm run prettier:write",
-    "poststyle": "npm run lint",
+    "format": "npm run prettier:write",
+    "style": "npm run format",
+    "postformat": "npm run lint",
     "pretest": "npm run lint",
     "test": "exit 0",
-    "predev": "npm run style",
+    "predev": "npm run format",
     "dev": "npm run test"
   },
   "repository": {

@@ -1,8 +1,11 @@
 name: Test actions/junit
 
 on:
-  push:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+  pull_request:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -118,3 +121,26 @@ jobs:
           summary_title: ""
           publish-test-deltas: ${{ matrix.publish-test-deltas }}
           comment_mode: off # XXX?
+
+  files_pattern__matrix:
+    needs: default
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        include:
+          - files_pattern: assets/test-results/jest/junit.xml
+            reporter: jest-junit
+
+          - files_pattern: assets/test-results/pytest/test-results.xml
+            reporter: python-xunit
+
+    name: "files_pattern: ${{ matrix.files_pattern }}"
+    steps:
+      - uses: percebus/github-actions-common/.github/actions/checkout@main
+      - uses: ./.github/actions/junit
+        with:
+          files_pattern: ${{ matrix.files_pattern }}
+          reporter: ${{ matrix.reporter }}
+          comment_mode: off
