@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "_prettier": "prettier .",
+    "_prettier:xml": "prettier . --plugin=@prettier/plugin-xml",
+    "prettier:check:xml": "npm run _prettier:xml -- --check",
+    "prettier:write:xml": "npm run _prettier:xml -- --write",
     "prettier:check": "npm run _prettier -- --check",
+    "postprettier:check": "npm run prettier:check:xml",
     "prettier:write": "npm run _prettier -- --write",
+    "postprettier:write": "npm run prettier:write:xml",
     "lint": "npm run prettier:check",
     "format": "npm run prettier:write",
     "style": "npm run format",
@@ -35,6 +40,7 @@
   },
   "homepage": "https://github.com/percebus/github-actions-testing#readme",
   "devDependencies": {
+    "@prettier/plugin-xml": "^3.4.2",
     "prettier": "^3.4.2"
   }
 }
